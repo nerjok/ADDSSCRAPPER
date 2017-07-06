@@ -2,8 +2,6 @@
 <div class="container-fluid bg-3 text-center">
 
 
-
- 
 <?php if($link != null): ?>
 
 <a href="<?php echo e($link); ?>"><?php echo e($link); ?></a>
@@ -19,7 +17,7 @@
   <div class="form-group">
     <label for="exampleInputEmail1"><?php echo e(__('Enter email')); ?></label>
     <input type="hidden" name="subscription" value="<?php echo e($link); ?>">
-    <input type="email" class="form-control" name="email" id="addUrl" placeholder="<?php echo e(__('Enter email')); ?>" value="<?php echo e(old('email')); ?>">
+   <!-- <input type="email" class="form-control" name="email" id="addUrl" placeholder="" value=""> -->
   </div>
   <button type="submit" class="btn btn-default">Submit</button>
 </form>

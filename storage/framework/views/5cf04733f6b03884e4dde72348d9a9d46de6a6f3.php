@@ -273,7 +273,7 @@ p {font-size: 16px;}
                                 <li><a href="http://cvzona.lt/">cvzona.lt</a></li>
                                 <li><a href="https://www.cvmarket.lt">cvmarket.lt</a></li>
                                 <li><a href="http://www.cvkodas.lt/">cvkodas.lt</a></li>
-                                 <li><a href="http://www.darbo.lt/">cvkodas.lt</a></li>
+                                 <li><a href="http://www.darbo.lt/">darbo.lt</a></li>
                                 <li><a href="http://www.dirba.lt/">dirba.lt</a></li>
                                 <li><a href="http://www.cvbankas.lt/">cvbankas</a></li>
                                 <li><a href="http://www.cv.lt/">cv.lt/</a></li>

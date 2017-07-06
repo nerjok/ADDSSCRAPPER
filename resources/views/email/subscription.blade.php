@@ -14,8 +14,9 @@ body {
 
 
 @if ($conte != null)
-   <table>
+  
  @foreach ($conte as $cont)
+  <table>
         @foreach ($cont as $entr)
         
          
@@ -26,8 +27,9 @@ body {
 
 
         @endforeach
+        </table><br>
 @endforeach
-</table>
+
 @else
 Deja, šiandien naujų skelbimų nėra.
 @endif

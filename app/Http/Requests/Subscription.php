@@ -26,8 +26,8 @@ class Subscription extends FormRequest
         return [
             
                        'subscription' => 'required|active_url',
-                       'user_id'    =>   'sometimes',
-                       'email'      => 'sometimes|email',
+                      // 'user_id'    =>   'sometimes',
+                      // 'email'      => 'sometimes|email',
                    
         ];
     }

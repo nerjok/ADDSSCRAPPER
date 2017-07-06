@@ -16,21 +16,21 @@ class SubscriptionController extends Controller
 {
 
     public $subscriptionRepository;
-    /*************************************
+    /**
      *
      * including repositories
      *
-     ************************************/
+     */
     public function __construct(SubscriptionRepository $subscriptionRepository)
     {
         $this->subscriptionRepository = $subscriptionRepository;
     }
 
-    /*************************************
+    /**
      *
      * Sending emails to guests
      *
-     *************************************/
+     */
     public function create(AddRequest $request, AddRepository $addRepository)
     {
         $this->subscriptionRepository->guestMail($addRepository);
@@ -40,11 +40,11 @@ class SubscriptionController extends Controller
                      echo  $date->format('m\\.d');
     }
 
-    /***********************************************
+    /**
     *
     *   Sending emails to authorized users
     *
-    ***********************************************/
+    */
 
     public function authEmails(AddRequest $request, AddRepository $addRepository)
     {
@@ -52,12 +52,12 @@ class SubscriptionController extends Controller
         $this->subscriptionRepository->authMail($addRepository);
 
     }
-    /*************************************
+    /**
      *
      * Store subscription requests 
      * from guests and authorized users
      *
-     ************************************/
+     */
     public function store(SubscriptionRepository $subscriptionRepository, \App\Http\Requests\Subscription $request)
     {
 
@@ -67,11 +67,11 @@ class SubscriptionController extends Controller
     }
 
 
-    /*************************************
+    /**
     *
-    * Guests email subscribtions confirmations
+    * Guests email subscriptions confirmations
     *
-    *************************************/
+    */
     public function guestConfirm($token)//needed validation
     {
         
@@ -87,35 +87,13 @@ class SubscriptionController extends Controller
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Subscription  $subscription
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Subscription $subscription)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Subscription  $subscription
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Subscription $subscription)
-    {
-        //
-    }
 
     /**
      * Remove the specified subscription
      *
      * 
      */
-    public function destroy(Subscription $subscription, $id)
+    public function destroy(\App\Subscription $subscription, $id)
     {
         
         \App\Subscription::where([

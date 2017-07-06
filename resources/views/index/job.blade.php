@@ -3,9 +3,7 @@
 @section('content')
 <div class="container-fluid bg-3 text-center">
 
-{{-- var_dump($url2) --}}
 
-{{-- $link --}} 
 @if($link != null)
 
 <a href="{{ $link }}">{{ $link}}</a>
@@ -18,7 +16,7 @@
   <div class="form-group">
     <label for="exampleInputEmail1">{{ __('Enter email')}}</label>
     <input type="hidden" name="subscription" value="{{ $link }}">
-    <input type="email" class="form-control" name="email" id="addUrl" placeholder="{{ __('Enter email')}}" value="{{ old('email') }}">
+   <!-- <input type="email" class="form-control" name="email" id="addUrl" placeholder="{{-- __('Enter email')--}}" value="{{-- old('email') --}}"> -->
   </div>
   <button type="submit" class="btn btn-default">Submit</button>
 </form>

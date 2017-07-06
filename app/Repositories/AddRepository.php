@@ -12,12 +12,12 @@ class AddRepository
 {
 
 
-    /*************************************
-    *
+    /**
+    * @param file url
     * Geting remote files, 
     * if file_get_contents fails
-    *
-    *************************************/
+    * @return array with odds'
+    */
     Public function getFile($url)
     {
             $ch = curl_init($url);
@@ -39,11 +39,11 @@ class AddRepository
     }
 
 
-  /****************************************************
-  *
+  /**
+  * @param file as a string and number of entities
   * cvbankas repository
-  *
-  *****************************************************/
+  * @return array with odds'
+  */
 
   public function cvbankas($file, $count = 4)
   {
@@ -74,11 +74,11 @@ class AddRepository
 
   }
 
-    /****************************************************
-    *
+    /**
+    * @param file as a string and number of entities
     * darbo repository
-    *
-    *****************************************************/
+    * @return array with odds'
+    */
 
     public function darbo($file, $count = 4)
     {
@@ -91,9 +91,9 @@ class AddRepository
 
                    $date = \Carbon\Carbon::yesterday();
           
-                     $day =  $date->format('m\\.d');
+                     $day =  $date->format('m.d');//was'm\\.d'
 
-                $conten= $xpath2->query("//table/tbody/tr[td[@class=\"cell2\" and contains(text(), '$day') ]]
+                $conten= $xpath2->query("//table/tbody/tr[td[@class=\"cell2\" and contains(text(), \"$day\") ]]
                                         [position() <= {$count}]");//
 
                         $conte = [];
@@ -114,11 +114,11 @@ class AddRepository
     }
 
 
-    /****************************************************
+    /**
     *
     * dirba repository
-    *
-    *****************************************************/
+    * @return array with odds'
+    */
 
     public function dirba($file, $count = 4)
     {
@@ -132,7 +132,7 @@ class AddRepository
 
                 $conten= $xpath2->query("//div[@style=\"padding-top:7px;\"]/div[@class=\"skelbimas\" 
                                             and
-                                        //div[@class=\"sKd\"]= 'Prieš 1 d.'    
+                                        //div[@class=\"sKd\"][contains(text(), \"Prieš 1 d.\")]    
                                             ][position() <= {$count}]");//
 
                         $conte = [];
@@ -156,11 +156,11 @@ class AddRepository
 
 
 
-    /****************************************************
+    /**
     *
     * cv.lt repository
-    *
-    *****************************************************/
+    * @return array with odds'
+    */
 
     public function cv($file, $count = 4)
     {
@@ -170,7 +170,7 @@ class AddRepository
                     $doc2->saveHTML();
 
                    $xpath2 = new \DomXPath($doc2);
-           $conten= $xpath2->query("//table/tbody/tr[@class=\"data\" and .//td[1]/div[contains(text(), 'Prieš 1 d.')]]
+           $conten= $xpath2->query("//table/tbody/tr[@class=\"data\" and .//td[1]/div[contains(text(), \"Vakar\")]]
                                         [position() <= {$count}]");//
 
                         $conte = [];
@@ -195,11 +195,11 @@ class AddRepository
         return $conte;
     }
 
-    /****************************************************
-    *
+    /**
+    * @param file as a string and number of entities
     * cvkodas repository
-    *
-    *****************************************************/
+    * @return array with odds'
+    */
 
     public function cvkodas($file, $count = 4)
     {
@@ -229,7 +229,13 @@ class AddRepository
 
     }
 
-      public function delfi()
+  /**
+  * @param no parameters needed.
+  *
+  * @return array this attached article value link, title, description.
+  */
+  
+  public function delfi()
   {
 
     
@@ -296,11 +302,11 @@ class AddRepository
         return $conte;
   }
 
-    /****************************************************
-    *
+    /**
+    * @param file as a string and number of entities
     * cvmarket repository
-    *
-    *****************************************************/
+    * @return array with odds'
+    */
 
     public function cvmarket($file, $count = 4)
     {
@@ -333,11 +339,11 @@ class AddRepository
     }
 
 
-    /****************************************************
-    *
+    /**
+    * @param file as a string and number of entities
     * cvzona repository,  corrections needed!!!
-    *
-    *****************************************************/
+    * @return array with odds'
+    */
 
     public function cvzona($file, $count = 4)
     {
@@ -360,11 +366,87 @@ class AddRepository
                                    if($conten->length > 0) {
                  foreach($conten as $parent) {
                         $cont = [];
-                        $cont['href'] =  'http://cvzona.lt'.$xpath2->query(".//div[@class=\"td td2\"]/div[@class=\"td-w\"]/h3/a/@href", $parent)->item(0)->nodeValue;
+                        $cont['href'] =  'http://kaunas.cvzona.lt'.$xpath2->query(".//div[@class=\"td td2\"]/div[@class=\"td-w\"]/h3/a/@href", $parent)->item(0)->nodeValue;
                        // $cont['description'] = $xpath2->query(".//div[@class=\"td td2\"]/div[@class=\"td-w\"]/div/em", $parent)->item(0)->nodeValue;
                         $cont['title'] =  $xpath2->query(".//div[@class=\"td td2\"]/div[@class=\"td-w\"]/h3/a", $parent)->item(0)->nodeValue;
 
                         $cont['description'] = $xpath2->query(".//div[@class=\"td td3\"]/div[@class=\"td-w\"]/div/span", $parent)->item(0)->nodeValue;
+
+                    array_push($conte, $cont);
+                    }
+                }
+ 
+        return $conte;
+
+    }
+
+    /**
+    * @param file as a string and number of entities
+    * 
+    * @return array with odds'
+    */
+
+    public function cvonline($file, $count = 4)
+    {
+                   $date = \Carbon\Carbon::yesterday();
+          
+                     $day =  $date->format('Y.m.d');
+                    $doc2 = new \DOMDocument();
+                    $doc2->loadHTML($file);
+                    $doc2->saveHTML();
+
+                   $xpath2 = new \DomXPath($doc2);
+
+                $conten= $xpath2->query("//table[@id =\"table_jobs\"]/tbody/tr[td[3]/p/span[@itemprop=\"datePosted\"][contains(text(), \"$day\")]]
+                                                                                
+                                                                                [position() <= {$count}]");
+
+                        $conte = [];
+                                   if($conten->length > 0) {
+                 foreach($conten as $parent) {
+                        $cont = [];
+                        $cont['href'] =  $xpath2->query(".//td[1]/a/@href", $parent)->item(0)->nodeValue;
+                        $cont['title'] = $xpath2->query(".//td[1]/a", $parent)->item(0)->nodeValue;
+                        $cont['description'] =  $xpath2->query(".//td[1]/span/a", $parent)->item(0)->nodeValue;
+
+                    array_push($conte, $cont);
+                    }
+                }
+ 
+        return $conte;
+
+    }
+
+
+    /**
+    * @param file as a string and number of entities
+    * cvmee.lt
+    * @return array with odds'
+    */
+
+    public function cvme($file, $count = 4)
+    {
+                   $date = \Carbon\Carbon::yesterday();
+          
+                     $day =  $date->format('Y.m.d');
+                    $doc2 = new \DOMDocument();
+                    $doc2->loadHTML($file);
+                    $doc2->saveHTML();
+
+                   $xpath2 = new \DomXPath($doc2);
+
+                                        
+                $conten= $xpath2->query("//tr[@class=\"fj-job-item\" and td[@class=\"tbl-icons\"]/ul/li/span/b[contains(text(), \" Prieš 1 dieną\")]][position() <= {$count}]");
+var_dump($conten);
+//[td[@class=\"tbl-icons\"]/ul/li/span/b[contains(text(), \" Prieš 1 dieną\")]][position() <= {$count}]
+
+                        $conte = [];
+                                   if($conten->length > 0) {
+                 foreach($conten as $parent) {
+                        $cont = [];
+                        $cont['href'] =  'http://cvme.lt'.$xpath2->query(".//td[@class=\"tbl-content\"]/h2/a/@href", $parent)->item(0)->nodeValue;
+                        $cont['title'] = $xpath2->query(".//td[@class=\"tbl-content\"]/h2/a", $parent)->item(0)->nodeValue;
+                        $cont['description'] =  $xpath2->query(".//td[@class=\"tbl-content\"]/span", $parent)->item(0)->nodeValue;
 
                     array_push($conte, $cont);
                     }

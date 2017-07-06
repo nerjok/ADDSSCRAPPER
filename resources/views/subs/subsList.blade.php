@@ -22,7 +22,7 @@
 <tr>
     <td>*</td>
     <td>{{$sub->created_at}}</td>
-    <td>{{ $sub->subscription}}</td>
+    <td>{{ str_limit($sub->subscription, 50)}}</td>
     <td><a href="delete/{{$sub->id}}">{{ __('Unsubscribe') }}</a></td>
 </tr>
 

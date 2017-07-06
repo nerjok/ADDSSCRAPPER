@@ -30,6 +30,8 @@ class SubscriptionRepository
                     $subscription->user_id = \Auth::user()->id;
 
                     } else {
+
+                    /* store guest requests */
                    $subscription->email = $request->input('email');
 
                    $link = uniqid();
@@ -58,7 +60,7 @@ class SubscriptionRepository
                 echo $subs->subscription, $subs->email.'<br>';
 
                     //hetting available adds
-                    $sites = array('cvbankas', 'dirba', 'darbo');
+                    $sites = array('cvbankas', 'dirba', 'darbo', 'cv', 'cvkodas','cvzona', 'cvmarket', 'cvme', 'cvonline');
                         foreach ($sites as $site) {
 
                             if (preg_match_all("/.{0,}{$site}.{0,}/", $subs->subscription)){
@@ -96,7 +98,7 @@ echo $user->myAdds.'<br>';
 
                foreach($user->myAdds as $subinfo){
                     
-                        $sites = array('darbo', 'cvbankas', 'dirba' );
+                        $sites = array('darbo', 'cvbankas', 'dirba', 'cv', 'cvkodas', 'cvzona', 'cvmarket', 'cvme', 'cvonline');
                         
                         foreach ($sites as $site) {
 

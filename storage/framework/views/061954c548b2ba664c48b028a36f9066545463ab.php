@@ -20,7 +20,7 @@
 <tr>
     <td>*</td>
     <td><?php echo e($sub->created_at); ?></td>
-    <td><?php echo e($sub->subscription); ?></td>
+    <td><?php echo e(str_limit($sub->subscription, 50)); ?></td>
     <td><a href="delete/<?php echo e($sub->id); ?>"><?php echo e(__('Unsubscribe')); ?></a></td>
 </tr>
 
