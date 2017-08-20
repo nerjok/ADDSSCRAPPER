@@ -33,6 +33,6 @@ class SubscriptionMail extends Mailable
     public function build()
     {
             
-        return $this->markdown('email.subscription');
+        return $this->subject('Adds subscription')->markdown('email.subscription');
     }
 }

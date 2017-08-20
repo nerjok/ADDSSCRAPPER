@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Nedarbas</title>
+<title>About</title>
 <meta charset="utf-8">
 <meta name="format-detection" content="telephone=no" />
 <link rel="icon" href="images/favicon.ico">
@@ -10,7 +10,7 @@
 
 
 
-<link rel="stylesheet" href="{{ URL::asset('css/style.css') }}">
+<link rel="stylesheet" href="css/style.css">
 <script src="js/jquery.js"></script>
 <script src="js/jquery-migrate-1.1.1.js"></script>
 <script src="js/jquery.easing.1.3.js"></script>
@@ -41,8 +41,6 @@
 <script src="js/html5shiv.js"></script>
 <link rel="stylesheet" media="screen" href="css/ie.css">
 <![endif]-->
-<meta name="viewport" content="width=device-width,initial-scale=1">
-
 </head>
 <body>
 <!--==============================
@@ -55,17 +53,17 @@
               Stuck menu
   =================================-->
 
-        @include ('layouts.menu')
+        <?php echo $__env->make('layouts.menu', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
   </section>
-  @yield('header')
+  <?php echo $__env->yieldContent('header'); ?>
 </header>
 <!--=====================
           Content
 ======================-->
 <section id="content">
   <div class="container">
-@yield('content')
+<?php echo $__env->yieldContent('content'); ?>
   </div>
 
 </section>
@@ -73,8 +71,7 @@
 
 
 
-        @include ('layouts.footer')
-<img src="{{ asset('bamt.gif') }}">
+        <?php echo $__env->make('layouts.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 </body>
 </html>
